@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/allPeople">
+    app:startDestination="@id/allFilm">
     <fragment
-        android:id="@+id/allPeople"
+        android:id="@+id/allFilm"
         android:name="com.example.starwars.fragment.AllFilm"
         android:label="fragment_all_film"
         tools:layout="@layout/fragment_all_film" />

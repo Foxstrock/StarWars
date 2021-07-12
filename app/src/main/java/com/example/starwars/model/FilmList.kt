@@ -13,6 +13,6 @@ data class FilmList(
     @SerializedName("previous")
     var previous : String = "",
 
-    @SerializedName("result")
+    @SerializedName("results")
     var result : ArrayList<Film> = ArrayList()
 )
