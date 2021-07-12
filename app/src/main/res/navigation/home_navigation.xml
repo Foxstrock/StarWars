@@ -6,7 +6,7 @@
     app:startDestination="@id/allPeople">
     <fragment
         android:id="@+id/allPeople"
-        android:name="com.example.starwars.fragment.AllPeople"
+        android:name="com.example.starwars.fragment.AllFilm"
         android:label="fragment_all_film"
         tools:layout="@layout/fragment_all_film" />
 </navigation>

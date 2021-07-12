@@ -1,6 +1,6 @@
 package com.example.starwars.retrofit
 
-import com.example.starwars.BuildConfig
+import com.example.starwars.BuildConfig.BASE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttp
 import okhttp3.OkHttpClient
@@ -29,7 +29,7 @@ object AdapterRest {
 
 
         var retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

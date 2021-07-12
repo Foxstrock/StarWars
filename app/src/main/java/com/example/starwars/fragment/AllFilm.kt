@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.starwars.R
 import com.example.starwars.databinding.FragmentAllFilmBinding
+import com.example.starwars.model.FilmList
 import com.example.starwars.model.People
 import com.example.starwars.model.PeopleList
 import com.example.starwars.retrofit.AdapterRest
@@ -15,7 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class AllPeople : Fragment() {
+class AllFilm : Fragment() {
 
     val binding by lazy {
         FragmentAllFilmBinding.inflate(layoutInflater)
@@ -39,23 +40,17 @@ class AllPeople : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getAllPeople()
+        getAllFilms()
     }
 
-    private fun getAllPeople() {
-        AdapterRest.clientEndPoints?.getAllPeople()?.enqueue(object : Callback<PeopleList>{
-            override fun onResponse(call: Call<PeopleList>, response: Response<PeopleList>) {
-
-                peopleList.clear()
-                peopleList = response.body()!!.result
-
+    fun getAllFilms(){
+        AdapterRest.clientEndPoints!!.getAllFilms().enqueue(object : Callback<FilmList>{
+            override fun onResponse(call: Call<FilmList>, response: Response<FilmList>) {
             }
 
-            override fun onFailure(call: Call<PeopleList>, t: Throwable) {
+            override fun onFailure(call: Call<FilmList>, t: Throwable) {
             }
-
         })
     }
-
 
 }
