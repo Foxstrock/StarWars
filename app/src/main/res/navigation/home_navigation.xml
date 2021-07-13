@@ -8,5 +8,14 @@
         android:id="@+id/allFilm"
         android:name="com.example.starwars.fragment.AllFilm"
         android:label="fragment_all_film"
-        tools:layout="@layout/fragment_all_film" />
+        tools:layout="@layout/fragment_all_film" >
+        <action
+            android:id="@+id/action_allFilm_to_getInfoFilm"
+            app:destination="@id/getInfoFilm" />
+    </fragment>
+    <fragment
+        android:id="@+id/getInfoFilm"
+        android:name="com.example.starwars.fragment.GetInfoFilm"
+        android:label="fragment_get_info_film"
+        tools:layout="@layout/fragment_get_info_film" />
 </navigation>

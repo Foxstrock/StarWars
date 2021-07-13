@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName
 data class FilmList(
 
     @SerializedName("count")
-    var count : String = "",
+    var count : Int = 0,
 
     @SerializedName("next")
-    var next : String = "",
+    var next : Any? = null,
 
     @SerializedName("previous")
-    var previous : String = "",
+    var previous : Any ?= null,
 
     @SerializedName("results")
-    var result : ArrayList<Film> = ArrayList()
+    var results : ArrayList<Film> = ArrayList()
 )

@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.starwars.R
 import com.example.starwars.databinding.FragmentAllFilmBinding
 import com.example.starwars.model.Film
 import com.example.starwars.model.FilmList
@@ -17,9 +18,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class AllFilm : Fragment() {
+class AllFilm : Fragment(),View.OnClickListener {
 
-   private val filmList : ArrayList<Film> = ArrayList()
+   private var filmList : ArrayList<Film> = ArrayList()
 
     val binding by lazy {
         FragmentAllFilmBinding.inflate(layoutInflater)
@@ -39,17 +40,19 @@ class AllFilm : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.listafilm.setOnClickListener(this)
         getAllFilms()
     }
 
     fun getAllFilms(){
-        AdapterRest.clientEndPoints?.getAllFilms()?.enqueue(object : Callback<FilmList>{
+        AdapterRest.clientEndPoints!!.getAllFilms().enqueue(object : Callback<FilmList>{
             override fun onResponse(call: Call<FilmList>, response: Response<FilmList>) {
-                if(response.body() != null) {
-                    filmList.clear()
-                    filmList.addAll(response.body()!!.result)
+
+
+                    filmList.addAll(response.body()!!.results)
                     initRecycler()
-                }
+
 
 
             }
@@ -61,7 +64,15 @@ class AllFilm : Fragment() {
 
     fun initRecycler() {
         binding.listafilm.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.listafilm.adapter = RecyclerAdapter(filmList)
+        binding.listafilm.adapter = RecyclerAdapter(filmList , this::onClick)
+    }
+
+    override fun onClick(v: View?) {
+        var url : String = filmList[binding.listafilm.getChildLayoutPosition(v!!)].url
+        url = url.drop(28)
+        url = url.dropLast(1)
+        IdSingleton.url = url
+        findNavController().navigate(R.id.action_allFilm_to_getInfoFilm)
     }
 
 

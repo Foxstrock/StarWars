@@ -22,19 +22,19 @@ data class Film(
     var relase_date : Date = Date(),
 
     @SerializedName("species")
-    var species : ArrayList<Species> = ArrayList(),
+    var species : ArrayList<String> = ArrayList(),
 
     @SerializedName("starships")
-    var starships : ArrayList<Starship> = ArrayList(),
+    var starships : ArrayList<String> = ArrayList(),
 
     @SerializedName("vehicles")
-    var vehicles : ArrayList<Vehicle> = ArrayList(),
+    var vehicles : ArrayList<String> = ArrayList(),
 
     @SerializedName("characters")
-    var characters : ArrayList<People> = ArrayList(),
+    var characters : ArrayList<String> = ArrayList(),
 
     @SerializedName("planets")
-    var planets : ArrayList<Planet> = ArrayList(),
+    var planets : ArrayList<String> = ArrayList(),
 
     @SerializedName("url")
     var url : String = "",

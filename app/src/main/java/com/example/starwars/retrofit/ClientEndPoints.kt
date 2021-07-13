@@ -13,12 +13,12 @@ interface ClientEndPoints {
     @GET("people")
     fun getAllPeople() : Call<PeopleList>
 
-    @GET("people/:id")
-    fun getPeopleInfo(@Path("id") id : Int) : Call<People>
+    @GET("people/{id}")
+    fun getPeopleInfo(@Path("id") url : String) : Call<People>
 
     @GET("films")
     fun getAllFilms() : Call<FilmList>
 
-    @GET("films/:id")
-    fun getFilmInfo(@Path("id") id : Int) : Call<Film>
+    @GET("films/{id}")
+    fun getFilmInfo(@Path("id") id : String) : Call<Film>
 }
