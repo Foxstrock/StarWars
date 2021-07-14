@@ -12,7 +12,11 @@
         android:layout_height="wrap_content"
         android:textSize="30dp" />
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/page"
+    >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="420dp"
@@ -20,9 +24,12 @@
         >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/testo"
+            android:layout_gravity="center"
+            android:textSize="30dp"
+            android:layout_marginTop="130dp"
             />
     </ScrollView>
 
@@ -62,6 +69,6 @@
         android:id="@+id/lastInfo"
         />
 
-
+</ScrollView>
 
 </LinearLayout>
