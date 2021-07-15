@@ -5,26 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import com.example.starwars.R
-import com.example.starwars.databinding.FragmentAllFilmBinding
-import com.example.starwars.databinding.FragmentGetInfoFilmBinding
+import com.example.starwars.databinding.FragmentGetPeopleInfoBinding
 import com.example.starwars.fragment.IdSingleton.url
-import com.example.starwars.model.Film
+import com.example.starwars.model.People
 import com.example.starwars.retrofit.AdapterRest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class GetInfoFilm : Fragment() {
+class GetPeopleInfo : Fragment() {
 
-    var FilmInfo : Film = Film()
+    var peopleInfo : People = People()
 
-    val binding by lazy {
-        FragmentGetInfoFilmBinding.inflate(layoutInflater)
+    val binding by lazy{
+        FragmentGetPeopleInfoBinding.inflate(layoutInflater)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,33 +36,40 @@ class GetInfoFilm : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
     }
 
     override fun onResume() {
         super.onResume()
-        getFilmInfo(url)
+        getPeopleInfo(url)
     }
 
-    private fun getFilmInfo(id : String) {
+    private fun getPeopleInfo(url : String) {
+        AdapterRest.clientEndPoints!!.getPeopleInfo(url).enqueue(object : Callback<People> {
+            override fun onResponse(call: Call<People>, response: Response<People>) {
 
-        AdapterRest.clientEndPoints!!.getFilmInfo(id).enqueue(object : Callback<Film> {
-            override fun onResponse(call: Call<Film>, response: Response<Film>) {
-
-                FilmInfo = response.body()!!
+                peopleInfo = response.body()!!
                 initLayout()
 
             }
 
-            override fun onFailure(call: Call<Film>, t: Throwable) {
+            override fun onFailure(call: Call<People>, t: Throwable) {
+                TODO("Not yet implemented")
             }
         })
-
     }
 
     private fun initLayout() {
-        binding.title.text = FilmInfo.title
-        binding.testo.text = FilmInfo.opening_crawl
-        binding.lastinfo.text = "Created : " + FilmInfo.created + "Edited : " + FilmInfo.edited
+
+        binding.name.text = peopleInfo.name
+        binding.gender.text = peopleInfo.gender
+        binding.birth.text = peopleInfo.birth_year
+        binding.eye.text = peopleInfo.eye_color
+        binding.skinColor.text = peopleInfo.skin_color
+
     }
+
 
 }

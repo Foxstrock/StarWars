@@ -29,16 +29,16 @@ data class People(
     var homeworld : String = "",
 
     @SerializedName("films")
-    var films : ArrayList<Film> = ArrayList(),
+    var films : ArrayList<String> = ArrayList(),
 
     @SerializedName("species")
-    var species : ArrayList<Species> = ArrayList(),
+    var species : ArrayList<String> = ArrayList(),
 
     @SerializedName("starships")
-    var starships : ArrayList<Starship> = ArrayList(),
+    var starships : ArrayList<String> = ArrayList(),
 
     @SerializedName("vehicles")
-    var vehicles : ArrayList<Vehicle> = ArrayList(),
+    var vehicles : ArrayList<String> = ArrayList(),
 
     @SerializedName("url")
     var url : String = "",

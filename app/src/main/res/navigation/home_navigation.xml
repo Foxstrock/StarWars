@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/allFilm">
+    app:startDestination="@id/menu">
     <fragment
         android:id="@+id/allFilm"
         android:name="com.example.starwars.fragment.AllFilm"
@@ -18,4 +18,30 @@
         android:name="com.example.starwars.fragment.GetInfoFilm"
         android:label="fragment_get_info_film"
         tools:layout="@layout/fragment_get_info_film" />
+    <fragment
+        android:id="@+id/menu"
+        android:name="com.example.starwars.fragment.menu"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menu_to_allFilm"
+            app:destination="@id/allFilm" />
+        <action
+            android:id="@+id/action_menu_to_allPeople"
+            app:destination="@id/allPeople" />
+    </fragment>
+    <fragment
+        android:id="@+id/allPeople"
+        android:name="com.example.starwars.fragment.AllPeople"
+        android:label="fragment_all_people"
+        tools:layout="@layout/fragment_all_people" >
+        <action
+            android:id="@+id/action_allPeople_to_getPeopleInfo"
+            app:destination="@id/getPeopleInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/getPeopleInfo"
+        android:name="com.example.starwars.fragment.GetPeopleInfo"
+        android:label="fragment_get_people_info"
+        tools:layout="@layout/fragment_get_people_info" />
 </navigation>
