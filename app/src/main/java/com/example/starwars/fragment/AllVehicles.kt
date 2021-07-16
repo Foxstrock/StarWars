@@ -9,8 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.starwars.R
 import com.example.starwars.adapterRecycler.VehicleAdapterRecycler
-import com.example.starwars.databinding.FragmentGetAllVehiclesBinding
-import com.example.starwars.model.PeopleList
+import com.example.starwars.databinding.FragmentAllVehiclesBinding
 import com.example.starwars.model.Vehicle
 import com.example.starwars.model.VehicleList
 import com.example.starwars.retrofit.AdapterRest
@@ -24,7 +23,7 @@ class AllVehicles : Fragment(), View.OnClickListener {
     var listaVeicoli : ArrayList<Vehicle> = ArrayList()
 
     val binding by lazy {
-        FragmentGetAllVehiclesBinding.inflate(layoutInflater)
+        FragmentAllVehiclesBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

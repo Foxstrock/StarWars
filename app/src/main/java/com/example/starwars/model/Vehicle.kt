@@ -13,11 +13,11 @@ data class Vehicle(
     @SerializedName("vehicle_class")
     var vehicle_class : String = "",
 
-    @SerializedName("manufacturare")
-    var manufacturare : String = "",
+    @SerializedName("manufacturer")
+    var manufacturer : String = "",
 
-    @SerializedName("cost_in_credit")
-    var cost_in_credit : String = "",
+    @SerializedName("cost_in_credits")
+    var cost_in_credits : String = "",
 
     @SerializedName("length")
     var lenght : String = "",

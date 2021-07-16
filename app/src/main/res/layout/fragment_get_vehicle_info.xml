@@ -17,7 +17,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/vehicleimginfo"
-    android:background="@drawable/star_wars_logo_png43"
+    android:background="@drawable/vehicle"
     />
 
     <TextView

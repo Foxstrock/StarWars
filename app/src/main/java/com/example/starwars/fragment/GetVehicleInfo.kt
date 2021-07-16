@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.starwars.R
 import com.example.starwars.adapterRecycler.CorrelateAdapter
 import com.example.starwars.databinding.FragmentGetVehicleInfoBinding
 import com.example.starwars.model.Film
@@ -17,10 +16,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class GetVehicleInfo : Fragment() {
+class GetVehicleInfo : Fragment(), View.OnClickListener {
 
     var vehicleInfo : Vehicle = Vehicle()
-    var filmCorrelate : ArrayList<Film> = ArrayList()
+    var filmCorrelate : String = ""
+    var arrayFilm : ArrayList<String> = ArrayList()
+    var idCor : String = ""
+    var i : Int = 0
 
     val binding by lazy {
         FragmentGetVehicleInfoBinding.inflate(layoutInflater)
@@ -41,6 +43,9 @@ class GetVehicleInfo : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.filmcorrelate.setOnClickListener(this)
+
     }
 
     override fun onResume() {
@@ -68,28 +73,47 @@ class GetVehicleInfo : Fragment() {
 
     private fun initLayout() {
 
-        filmCorrelate(id)
-
-        binding.crew.text=vehicleInfo.crew
-        binding.vehiclenameinfo.text = vehicleInfo.name
-        binding.vehiclemodelinfo.text = vehicleInfo.model
-        binding.vehicleclassinfo.text = vehicleInfo.vehicle_class
-        binding.vehiclemanufainfo.text = vehicleInfo.manufacturare
-        binding.vehiclelenghtinfo.text = vehicleInfo.lenght
-        binding.vehiclecostinfo.text = vehicleInfo.cost_in_credit
-        binding.vehicleAtmoSpeedInfo.text = vehicleInfo.max_atmosphering_speed
-        binding.vehicleConsumableInfo.text = vehicleInfo.consumables
-        binding.vehiclecargoinfo.text = vehicleInfo.cargo_capacity
-        binding.vehiclepassengerinfo.text = vehicleInfo.passengers
+        binding.crew.text="Crew : "+vehicleInfo.crew
+        binding.vehiclenameinfo.text = "Name : " + vehicleInfo.name
+        binding.vehiclemodelinfo.text = "Model : "+vehicleInfo.model
+        binding.vehicleclassinfo.text = "Class : "+vehicleInfo.vehicle_class
+        binding.vehiclemanufainfo.text = "manufacturer"+vehicleInfo.manufacturer
+        binding.vehiclelenghtinfo.text = "length : " + vehicleInfo.lenght
+        binding.vehiclecostinfo.text =   "cost_in_credits : " + vehicleInfo.cost_in_credits
+        binding.vehicleAtmoSpeedInfo.text = "max_atmosphering_speed : "+vehicleInfo.max_atmosphering_speed
+        binding.vehicleConsumableInfo.text = "Consumable : "+vehicleInfo.consumables
+        binding.vehiclecargoinfo.text = "Cargo capacity : "+vehicleInfo.cargo_capacity
+        binding.vehiclepassengerinfo.text = "Passenger : "+vehicleInfo.passengers
         binding.vehiclelastInfo.text = "Created : " + vehicleInfo.created + " \n "  + "Edited : " + vehicleInfo.edited
+
+
+            idCor = vehicleInfo.films[0]
+            idCor = idCor.drop(28)
+            idCor = idCor.dropLast(1)
+            getFilmInfo(idCor)
+            initRecyclerfilm()
+
     }
 
-    private fun filmCorrelate(id: String) {
-        AdapterRest.clientEndPoints!!.getFilmInfo(id).enqueue(object : Callback<Film>{
+
+
+
+
+    private fun initRecyclerfilm() {
+        binding.filmcorrelate.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.filmcorrelate.adapter = CorrelateAdapter(arrayFilm , this)
+    }
+
+
+
+    private fun getFilmInfo(id : String) {
+
+        AdapterRest.clientEndPoints!!.getFilmInfo(id).enqueue(object : Callback<Film> {
             override fun onResponse(call: Call<Film>, response: Response<Film>) {
 
-                filmCorrelate = response.body()!!.
-                initRecycler()
+                arrayFilm.addAll(listOf(response.body()!!.title))
+
+
 
             }
 
@@ -97,10 +121,12 @@ class GetVehicleInfo : Fragment() {
                 print("")
             }
         })
+
     }
 
-    private fun initRecycler() {
-        binding.filmcorrelate.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        binding.filmcorrelate.adapter = CorrelateAdapter(filmCorrelate , this)
+    override fun onClick(v: View?) {
+
     }
+
+
 }

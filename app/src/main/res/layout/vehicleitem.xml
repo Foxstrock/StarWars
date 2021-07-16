@@ -13,9 +13,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="200dp"
             android:id="@+id/vehicleimg"
-            android:background="@drawable/star_wars_logo_png43"
+            android:background="@drawable/vehicle"
             />
 
         <TextView
