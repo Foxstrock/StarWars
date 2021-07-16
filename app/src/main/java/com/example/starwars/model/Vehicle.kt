@@ -19,7 +19,10 @@ data class Vehicle(
     @SerializedName("cost_in_credit")
     var cost_in_credit : String = "",
 
-    @SerializedName("lenght")
+    @SerializedName("length")
+    var lenght : String = "",
+
+    @SerializedName("crew")
     var crew : String = "",
 
     @SerializedName("passengers")

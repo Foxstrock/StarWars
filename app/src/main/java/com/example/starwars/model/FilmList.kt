@@ -11,7 +11,7 @@ data class FilmList(
     var next : Any? = null,
 
     @SerializedName("previous")
-    var previous : Any ?= null,
+    var previous : Any? = null,
 
     @SerializedName("results")
     var results : ArrayList<Film> = ArrayList()

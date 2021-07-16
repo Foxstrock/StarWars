@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.starwars.R
+import com.example.starwars.adapterRecycler.VehicleAdapterRecycler
 import com.example.starwars.databinding.FragmentGetAllVehiclesBinding
 import com.example.starwars.model.PeopleList
 import com.example.starwars.model.Vehicle
@@ -66,11 +68,16 @@ class AllVehicles : Fragment(), View.OnClickListener {
 
     private fun initRecycler() {
         binding.listaveicoli.layoutManager = GridLayoutManager(requireContext() , 2 )
-        binding.listaveicoli.adapter =
+        binding.listaveicoli.adapter = VehicleAdapterRecycler(listaVeicoli , this::onClick)
     }
 
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+
+        var url : String = listaVeicoli[binding.listaveicoli.getChildLayoutPosition(v!!)].url
+        url = url.drop(31)
+        url = url.dropLast(1)
+        IdSingleton.url = url
+        findNavController().navigate(R.id.action_allVehicles_to_getVehicleInfo)
     }
 
 

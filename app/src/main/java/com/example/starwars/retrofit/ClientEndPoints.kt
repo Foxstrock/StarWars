@@ -22,6 +22,6 @@ interface ClientEndPoints {
     @GET("vehicles")
     fun getAllVehicle() : Call<VehicleList>
 
-    @GET("vehgicles/{id}")
-    fun getVehivleInfo(@Path("id") id : String)
+    @GET("vehicles/{id}")
+    fun getVehicleInfo(@Path("id") id : String) : Call<Vehicle>
 }

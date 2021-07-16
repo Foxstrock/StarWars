@@ -5,29 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.starwars.R
+import com.example.starwars.adapterRecycler.CorrelateAdapter
+import com.example.starwars.databinding.FragmentGetVehicleInfoBinding
+import com.example.starwars.model.Film
+import com.example.starwars.model.Vehicle
+import com.example.starwars.retrofit.AdapterRest
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GetVehicleInfo.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GetVehicleInfo : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    var vehicleInfo : Vehicle = Vehicle()
+    var filmCorrelate : ArrayList<Film> = ArrayList()
+
+    val binding by lazy {
+        FragmentGetVehicleInfoBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +36,71 @@ class GetVehicleInfo : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_get_vehicle_info, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GetVehicleInfo.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GetVehicleInfo().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getInfoVehicle(IdSingleton.url)
+    }
+
+    private fun getInfoVehicle(id : String) {
+
+        AdapterRest.clientEndPoints!!.getVehicleInfo(id).enqueue(object : Callback<Vehicle>{
+            override fun onResponse(call: Call<Vehicle>, response: Response<Vehicle>) {
+
+                vehicleInfo = response.body()!!
+                initLayout()
             }
+
+            override fun onFailure(call: Call<Vehicle>, t: Throwable) {
+
+                print("")
+
+            }
+        })
+
+    }
+
+    private fun initLayout() {
+
+        filmCorrelate(id)
+
+        binding.crew.text=vehicleInfo.crew
+        binding.vehiclenameinfo.text = vehicleInfo.name
+        binding.vehiclemodelinfo.text = vehicleInfo.model
+        binding.vehicleclassinfo.text = vehicleInfo.vehicle_class
+        binding.vehiclemanufainfo.text = vehicleInfo.manufacturare
+        binding.vehiclelenghtinfo.text = vehicleInfo.lenght
+        binding.vehiclecostinfo.text = vehicleInfo.cost_in_credit
+        binding.vehicleAtmoSpeedInfo.text = vehicleInfo.max_atmosphering_speed
+        binding.vehicleConsumableInfo.text = vehicleInfo.consumables
+        binding.vehiclecargoinfo.text = vehicleInfo.cargo_capacity
+        binding.vehiclepassengerinfo.text = vehicleInfo.passengers
+        binding.vehiclelastInfo.text = "Created : " + vehicleInfo.created + " \n "  + "Edited : " + vehicleInfo.edited
+    }
+
+    private fun filmCorrelate(id: String) {
+        AdapterRest.clientEndPoints!!.getFilmInfo(id).enqueue(object : Callback<Film>{
+            override fun onResponse(call: Call<Film>, response: Response<Film>) {
+
+                filmCorrelate = response.body()!!.
+                initRecycler()
+
+            }
+
+            override fun onFailure(call: Call<Film>, t: Throwable) {
+                print("")
+            }
+        })
+    }
+
+    private fun initRecycler() {
+        binding.filmcorrelate.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.filmcorrelate.adapter = CorrelateAdapter(filmCorrelate , this)
     }
 }
