@@ -19,7 +19,10 @@ data class Vehicle(
     @SerializedName("cost_in_credit")
     var cost_in_credit : String = "",
 
-    @SerializedName("lenght")
+    @SerializedName("length")
+    var lenght : String = "",
+
+    @SerializedName("crew")
     var crew : String = "",
 
     @SerializedName("passengers")
@@ -35,10 +38,10 @@ data class Vehicle(
     var consumables : String = "",
 
     @SerializedName("films")
-    var films : ArrayList<Film> = ArrayList(),
+    var films : ArrayList<String> = ArrayList(),
 
     @SerializedName("pilots")
-    var pilots : ArrayList<People> = ArrayList(),
+    var pilots : ArrayList<String> = ArrayList(),
 
     @SerializedName("url")
     var url : String = "",
