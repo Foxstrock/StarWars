@@ -12,7 +12,7 @@ import com.example.starwars.databinding.FragmentAllFilmBinding
 import com.example.starwars.model.Film
 import com.example.starwars.model.FilmList
 import com.example.starwars.retrofit.AdapterRest
-import com.example.starwars.retrofit.RecyclerAdapter
+import com.example.starwars.adapterRecycler.FilmRecyclerAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,7 +64,7 @@ class AllFilm : Fragment(),View.OnClickListener {
 
     fun initRecycler() {
         binding.listafilm.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.listafilm.adapter = RecyclerAdapter(filmList , this::onClick)
+        binding.listafilm.adapter = FilmRecyclerAdapter(filmList , this::onClick)
     }
 
     override fun onClick(v: View?) {

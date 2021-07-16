@@ -1,4 +1,4 @@
-package com.example.starwars.retrofit
+package com.example.starwars.adapterRecycler
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.starwars.R
 import com.example.starwars.model.Film
 
-class RecyclerAdapter(var filmList: ArrayList<Film>, val listener: View.OnClickListener?) : RecyclerView.Adapter<RecyclerAdapter.RecViewHold>() {
+class FilmRecyclerAdapter(var filmList: ArrayList<Film>, val listener: View.OnClickListener?) : RecyclerView.Adapter<FilmRecyclerAdapter.RecViewHold>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecViewHold {
         return RecViewHold(LayoutInflater.from(parent.context).inflate(R.layout.filmitem, parent , false))
