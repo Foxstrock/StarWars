@@ -8,35 +8,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="175dp"
-            android:id="@+id/vehicleimg"
             android:background="@drawable/vehicle"
             />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/vehiclename"
+            android:id="@+id/name"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/model"
-            />
+            android:id="@+id/model"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/vehicleclass"
-            />
-
+            android:id="@+id/starClass"/>
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

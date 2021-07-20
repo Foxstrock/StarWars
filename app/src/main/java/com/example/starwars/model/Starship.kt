@@ -42,10 +42,10 @@ data class Starship(
     var consumables : String = "",
 
     @SerializedName("films")
-    var films : ArrayList<Film> = ArrayList(),
+    var films : ArrayList<String> = ArrayList(),
 
     @SerializedName("pilots")
-    var pilots : ArrayList<People> = ArrayList(),
+    var pilots : ArrayList<String> = ArrayList(),
 
     @SerializedName("url")
     var url : String = "",

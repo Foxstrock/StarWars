@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.starwars.R
 import com.example.starwars.adapterRecycler.CorrelateAdapter
 import com.example.starwars.databinding.FragmentGetVehicleInfoBinding
 import com.example.starwars.model.Film
@@ -19,10 +21,11 @@ import retrofit2.Response
 class GetVehicleInfo : Fragment(), View.OnClickListener {
 
     var vehicleInfo : Vehicle = Vehicle()
-    var filmCorrelate : String = ""
-    var arrayFilm : ArrayList<String> = ArrayList()
+    var filmCorrelate : Film = Film()
+    var arrayFilm : ArrayList<Film> = ArrayList()
     var idCor : String = ""
     var i : Int = 0
+    var max : Int = 0
 
     val binding by lazy {
         FragmentGetVehicleInfoBinding.inflate(layoutInflater)
@@ -86,24 +89,14 @@ class GetVehicleInfo : Fragment(), View.OnClickListener {
         binding.vehiclepassengerinfo.text = "Passenger : "+vehicleInfo.passengers
         binding.vehiclelastInfo.text = "Created : " + vehicleInfo.created + " \n "  + "Edited : " + vehicleInfo.edited
 
-
-            idCor = vehicleInfo.films[0]
+            max = vehicleInfo.films.size - 1
+            idCor = vehicleInfo.films[i]
             idCor = idCor.drop(28)
             idCor = idCor.dropLast(1)
             getFilmInfo(idCor)
-            initRecyclerfilm()
+
 
     }
-
-
-
-
-
-    private fun initRecyclerfilm() {
-        binding.filmcorrelate.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        binding.filmcorrelate.adapter = CorrelateAdapter(arrayFilm , this)
-    }
-
 
 
     private fun getFilmInfo(id : String) {
@@ -111,8 +104,17 @@ class GetVehicleInfo : Fragment(), View.OnClickListener {
         AdapterRest.clientEndPoints!!.getFilmInfo(id).enqueue(object : Callback<Film> {
             override fun onResponse(call: Call<Film>, response: Response<Film>) {
 
-                arrayFilm.addAll(listOf(response.body()!!.title))
-
+                filmCorrelate = response.body()!!
+                arrayFilm.addAll(listOf(filmCorrelate))
+                if(i < max){
+                    i++
+                    idCor = vehicleInfo.films[i]
+                    idCor = idCor.drop(28)
+                    idCor = idCor.dropLast(1)
+                    getFilmInfo(idCor)
+                }else{
+                    initRecyclerfilm()
+                }
 
 
             }
@@ -124,8 +126,20 @@ class GetVehicleInfo : Fragment(), View.OnClickListener {
 
     }
 
+
+    private fun initRecyclerfilm() {
+        binding.filmcorrelate.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.filmcorrelate.adapter = CorrelateAdapter(arrayFilm , this)
+    }
+
+
     override fun onClick(v: View?) {
 
+        var url : String = arrayFilm[binding.filmcorrelate.getChildLayoutPosition(v!!)].url
+        url = url.drop(28)
+        url = url.dropLast(1)
+        IdSingleton.url = url
+       findNavController().navigate(R.id.action_getVehicleInfo_to_getInfoFilm)
     }
 
 

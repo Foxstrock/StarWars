@@ -36,7 +36,11 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="100dp"/>
+            android:layout_height="100dp"
+            android:text="StarShip"
+            android:textSize="25dp"
+            android:id="@+id/StarShip"
+            />
 
         <Button
             android:layout_width="match_parent"

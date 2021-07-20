@@ -37,6 +37,7 @@ class menu : Fragment(), View.OnClickListener {
         binding.film.setOnClickListener(this)
         binding.people.setOnClickListener(this)
         binding.Vehicle.setOnClickListener(this)
+        binding.StarShip.setOnClickListener(this)
 
 
     }
@@ -54,6 +55,8 @@ class menu : Fragment(), View.OnClickListener {
             binding.people.id -> findNavController().navigate(R.id.action_menu_to_allPeople)
 
             binding.Vehicle.id -> findNavController().navigate(R.id.action_menu_to_allVehicles)
+
+            binding.StarShip.id -> findNavController().navigate(R.id.action_menu_to_allStarShip)
 
         }
 

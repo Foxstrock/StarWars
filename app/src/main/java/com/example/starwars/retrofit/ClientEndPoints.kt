@@ -9,13 +9,10 @@ import retrofit2.http.Query
 interface ClientEndPoints {
 
     @GET("people")
-    fun getAllPeople() : Call<PeopleList>
+    fun getAllPeople(@Query("page") pag : String) : Call<PeopleList>
 
     @GET("people/{id}")
     fun getPeopleInfo(@Path("id") id : String) : Call<People>
-
-    @GET("people/{quey}")
-    fun searchPeople(@Query("search=") element : String) : Call<People>
 
     @GET("films")
     fun getAllFilms() : Call<FilmList>
@@ -23,15 +20,14 @@ interface ClientEndPoints {
     @GET("films/{id}")
     fun getFilmInfo(@Path("id") id : String) : Call<Film>
 
-    @GET("films/{query}")
-    fun searchFilm(@Query("search=") element : String) : Call<Film>
-
     @GET("vehicles")
-    fun getAllVehicle() : Call<VehicleList>
+    fun getAllVehicle(@Query("page")pag : String) : Call<VehicleList>
 
     @GET("vehicles/{id}")
     fun getVehicleInfo(@Path("id") id : String) : Call<Vehicle>
 
+    @GET("starships")
+    fun getAllStarShip(@Query("page")pag : String) : Call<StarShipList>
 
 
 }

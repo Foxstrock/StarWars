@@ -22,6 +22,8 @@ class AllVehicles : Fragment(), View.OnClickListener {
 
     var listaVeicoli : ArrayList<Vehicle> = ArrayList()
 
+    var pag : Int = 1
+
     val binding by lazy {
         FragmentAllVehiclesBinding.inflate(layoutInflater)
     }
@@ -51,12 +53,16 @@ class AllVehicles : Fragment(), View.OnClickListener {
     }
 
     private fun getAllVehicle() {
-        AdapterRest.clientEndPoints!!.getAllVehicle().enqueue(object : Callback<VehicleList>{
+        AdapterRest.clientEndPoints!!.getAllVehicle(pag.toString()).enqueue(object : Callback<VehicleList>{
             override fun onResponse(call: Call<VehicleList>, response: Response<VehicleList>) {
 
-                listaVeicoli = response.body()!!.results
-                initRecycler()
-
+                listaVeicoli.addAll(response.body()!!.results)
+                if (pag < 4){
+                    pag++
+                    getAllVehicle()
+                }else {
+                    initRecycler()
+                }
             }
 
             override fun onFailure(call: Call<VehicleList>, t: Throwable) {

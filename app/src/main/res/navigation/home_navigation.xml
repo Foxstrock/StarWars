@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_menu_to_allVehicles"
             app:destination="@id/allVehicles" />
+        <action
+            android:id="@+id/action_menu_to_allStarShip"
+            app:destination="@id/allStarShip" />
     </fragment>
     <fragment
         android:id="@+id/allPeople"
@@ -59,5 +62,14 @@
     <fragment
         android:id="@+id/getVehicleInfo"
         android:name="com.example.starwars.fragment.GetVehicleInfo"
-        android:label="GetVehicleInfo" />
+        android:label="GetVehicleInfo" >
+        <action
+            android:id="@+id/action_getVehicleInfo_to_getInfoFilm"
+            app:destination="@id/getInfoFilm" />
+    </fragment>
+    <fragment
+        android:id="@+id/allStarShip"
+        android:name="com.example.starwars.fragment.AllStarShip"
+        android:label="fragment_all_star_ship"
+        tools:layout="@layout/fragment_all_star_ship" />
 </navigation>

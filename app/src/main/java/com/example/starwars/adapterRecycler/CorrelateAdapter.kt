@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.starwars.R
 import com.example.starwars.model.Film
 
-class CorrelateAdapter(val correlate: ArrayList<String>, val listener: View.OnClickListener?) : RecyclerView.Adapter<CorrelateAdapter.RecViewHold>(){
+class CorrelateAdapter(val correlate: ArrayList<Film>, val listener: View.OnClickListener?) : RecyclerView.Adapter<CorrelateAdapter.RecViewHold>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecViewHold {
         return RecViewHold(LayoutInflater.from(parent.context).inflate(R.layout.correlateitem, parent , false))
@@ -17,7 +17,7 @@ class CorrelateAdapter(val correlate: ArrayList<String>, val listener: View.OnCl
 
     override fun onBindViewHolder(holder: CorrelateAdapter.RecViewHold, position: Int) {
 
-        holder.corr.text = correlate[position]
+        holder.corr.text = correlate[position].title
 
         holder.itemView.setOnClickListener(listener)
     }

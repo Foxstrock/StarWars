@@ -23,6 +23,7 @@ class AllPeople : Fragment() , View.OnClickListener {
 
     var listaPersone : ArrayList<People> = ArrayList()
 
+    var pag : Int = 1
 
     val binding by lazy {
         FragmentAllPeopleBinding.inflate(layoutInflater)
@@ -55,12 +56,16 @@ class AllPeople : Fragment() , View.OnClickListener {
 
     private fun getAllPeople() {
 
-        AdapterRest.clientEndPoints!!.getAllPeople().enqueue(object : Callback<PeopleList>{
+        AdapterRest.clientEndPoints!!.getAllPeople(pag.toString()).enqueue(object : Callback<PeopleList>{
             override fun onResponse(call: Call<PeopleList>, response: Response<PeopleList>) {
 
-                listaPersone = response.body()!!.results
+                listaPersone.addAll(response.body()!!.results)
+                if(pag <= 6){
+                    pag++
+                    getAllPeople()
+                }else{
                 initRecycler()
-
+                }
             }
 
             override fun onFailure(call: Call<PeopleList>, t: Throwable) {
